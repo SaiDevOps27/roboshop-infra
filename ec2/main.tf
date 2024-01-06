@@ -25,7 +25,7 @@ resource "null_resource" "provisioner" {
     inline = [
       "git clone https://github.com/SaiDevOps27/roboshop-shell",
       "cd roboshop-shell",
-      "sudo bash ${var.component}.sh"
+      "sudo bash ${var.component}.sh ${var.password}"
     ]
   }
 }
@@ -67,4 +67,5 @@ variable "component" {}
 variable "env" {
   default = "dev"
 }
+variable "password" {}
 
