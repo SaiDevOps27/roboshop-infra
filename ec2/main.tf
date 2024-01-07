@@ -1,5 +1,6 @@
 data "aws_caller_identity" "current" {}
 
+
 data "aws_ami" "ami" {
   most_recent = "true"
   name_regex = "devops-practice-with-ansible"
@@ -25,7 +26,7 @@ resource "null_resource" "provisioner" {
     }
 
     inline = [
-      "ansible-pull -i localhost, -U https://github.com/SaiDevOps27/roboshop-ansible roboshop.yml -e role_name=${var.component}"
+      "ansible-pull -i localhost, -U https://github.com/SaiDevOps27/roboshop-ansible.git roboshop.yml -e role_name=${var.component}"
     ]
   }
 }
@@ -67,5 +68,6 @@ variable "component" {}
 variable "env" {
   default = "dev"
 }
+
 
 
