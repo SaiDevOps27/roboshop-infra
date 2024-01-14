@@ -1,11 +1,3 @@
-data "aws_caller_identity" "current" {}
-
-
-data "aws_ami" "ami" {
-  most_recent = true
-  name_regex = "devops-practice-with-ansible"
-  owners     = [data.aws_caller_identity.current.account_id]
-}
 
 resource "aws_instance" "ec2" {
   ami            = data.aws_ami.ami.image_id
@@ -63,12 +55,23 @@ resource "aws_route53_record" "record" {
   ttl     = 30
   records = [aws_instance.ec2.private_ip]
 }
-variable "instance_type" {}
-variable "component" {}
-variable "env" {
-  default = "dev"
+resource "aws_iam_policy" "ssm-policy" {
+  name        = "${var.env}-${var.component}-ssm"
+  path        = "/"
+  description = "${var.env}-${var.component}-ssm"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
 }
-
 
 
 

@@ -4,3 +4,6 @@ instances = {
     type = "t3.small"
   }
 }
+
+env = "dev"
+
