@@ -52,3 +52,9 @@ vpc = {
   }
 }
 
+docdb = {
+  main = {
+    engine = "docdb"
+  }
+}
+
