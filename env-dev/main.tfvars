@@ -55,6 +55,11 @@ vpc = {
 docdb = {
   main = {
     engine = "docdb"
+    engine_version = "4.0.0"
+    backup_retention_period = 2
+    preferred_backup_window = "07:00-09:00"
+    skip_final_snapshot     = true
+
   }
 }
 
