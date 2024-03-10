@@ -59,6 +59,8 @@ docdb = {
     backup_retention_period = 2
     preferred_backup_window = "07:00-09:00"
     skip_final_snapshot     = true
+    no_of_instances = 1
+    instance_class = "db.t3.medium"
 
   }
 }
