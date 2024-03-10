@@ -4,6 +4,6 @@ variable "default_route_table" {}
 variable "vpc" {}
 variable "tags" {}
 variable "docdb" {}
-
+variable "rds" {}
 
 

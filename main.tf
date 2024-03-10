@@ -30,6 +30,21 @@ module "docdb" {
 }
 
 
+module "rds" {
+  source = "git::https://github.com/SaiDevOps27/tf-module-rds.git"
+  env = var.env
+  tags = var.tags
+
+  for_each = var.rds
+  engine = each.value["engine"]
+  backup_retention_period = each.value["backup_retention_period"]
+  preferred_backup_window = each.value["preferred_backup_window"]
+  engine_version = each.value["engine_version"]
+  no_of_instances = each.value["no_of_instances"]
+  instance_class = each.value["instance_class"]
+  subnet_ids = local.db_subnet_ids
+}
+
 output "vpc" {
   value = local.db_subnet_ids
 }
