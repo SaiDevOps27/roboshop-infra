@@ -5,5 +5,7 @@ variable "vpc" {}
 variable "tags" {}
 variable "docdb" {}
 variable "rds" {}
+variable "elasticache" {}
+
 
 
