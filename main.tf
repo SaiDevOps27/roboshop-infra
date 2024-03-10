@@ -58,6 +58,17 @@ module "elasticache" {
   subnet_ids = local.db_subnet_ids
 }
 
+
+module "rabbitmq" {
+  source = "git::https://github.com/SaiDevOps27/tf-module-rabbitmq.git"
+  env = var.env
+  tags = var.tags
+
+  for_each = var.rabbitmq
+  instance_type = each.value["instance_type"]
+  subnet_ids = local.db_subnet_ids
+}
+
 output "vpc" {
   value = local.db_subnet_ids
 }
