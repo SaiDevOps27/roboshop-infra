@@ -1,4 +1,5 @@
 env = "dev"
+bastion_cidr = ["172.31.91.182/32"]
 
 vpc = {
   main = {
@@ -89,6 +90,93 @@ elasticache = {
 rabbitmq = {
   main = {
     instance_type = "t3.medium"
+
+  }
+}
+
+alb = {
+  public = {
+    subnet_name = "public"
+    name = "public"
+    internal = false
+    load_balancer_type = "application"
+
+  }
+
+  private = {
+    subnet_name = "app"
+    name = "private"
+    internal = true
+    load_balancer_type = "application"
+
+  }
+}
+
+apps = {
+  catalogue = {
+    component = "catalogue"
+    instance_type = "t3.small"
+    desired_capacity   = 1
+    max_size           = 4
+    min_size           = 1
+    subnet_name = "app"
+    port = 8080
+    allow_app_to = "app"
+
+  }
+  cart = {
+    component = "cart"
+    instance_type = "t3.small"
+    desired_capacity   = 1
+    max_size           = 4
+    min_size           = 1
+    subnet_name = "app"
+    port = 8080
+    allow_app_to = "app"
+
+  }
+  user = {
+    component = "user"
+    instance_type = "t3.small"
+    desired_capacity   = 1
+    max_size           = 4
+    min_size           = 1
+    subnet_name = "app"
+    port = 8080
+    allow_app_to = "app"
+
+  }
+  shipping = {
+    component = "shipping"
+    instance_type = "t3.small"
+    desired_capacity   = 1
+    max_size           = 4
+    min_size           = 1
+    subnet_name = "app"
+    port = 8080
+    allow_app_to = "app"
+
+  }
+  payment = {
+    component = "payment"
+    instance_type = "t3.small"
+    desired_capacity   = 1
+    max_size           = 4
+    min_size           = 1
+    subnet_name = "app"
+    port = 8080
+    allow_app_to = "app"
+
+  }
+  frontend = {
+    component = "frontend"
+    instance_type = "t3.small"
+    desired_capacity   = 1
+    max_size           = 4
+    min_size           = 1
+    subnet_name = "web"
+    port = 80
+    allow_app_to = "public"
 
   }
 }
