@@ -75,8 +75,10 @@ module "alb" {
   source = "git::https://github.com/SaiDevOps27/tf-module-alb.git"
   env = var.env
   tags = var.tags
+  vpc_id = module.vpc["main"].vpc_id
 
   for_each = var.alb
+  allow_cidr = each.value["allow_cidr"]
   name = each.value["name"]
   internal = each.value["internal"]
   load_balancer_type = each.value["load_balancer_type"]
