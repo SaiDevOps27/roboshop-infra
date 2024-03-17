@@ -20,6 +20,7 @@ module "docdb" {
 
   for_each = var.docdb
   engine = each.value["engine"]
+  vpc_id = module.vpc["main"].vpc_id
   backup_retention_period = each.value["backup_retention_period"]
   preferred_backup_window = each.value["preferred_backup_window"]
   skip_final_snapshot = each.value["skip_final_snapshot"]
@@ -27,6 +28,7 @@ module "docdb" {
   no_of_instances = each.value["no_of_instances"]
   instance_class = each.value["instance_class"]
   subnet_ids = local.db_subnet_ids
+  allow_subnets = lookup(local.subnet_cidr, each.value["allow_subnets"], null)
 }
 
 
