@@ -46,6 +46,9 @@ module "rds" {
   no_of_instances = each.value["no_of_instances"]
   instance_class = each.value["instance_class"]
   subnet_ids = local.db_subnet_ids
+  vpc_id = module.vpc["main"].vpc_id
+  allow_subnets = lookup(local.subnet_cidr, each.value["allow_subnets"], null)
+
 }
 
 module "elasticache" {
@@ -110,7 +113,7 @@ module "app" {
   port = each.value["port"]
   listener_priority = each.value["listener_priority"]
   allow_app_to = lookup(local.subnet_cidr, each.value["allow_app_to"], null)
-  alb_dbs_name = lookup(lookup(lookup(module.alb, each.value["alb"], null), "alb", null), "dns_name", null)
+  alb_dns_name = lookup(lookup(lookup(module.alb, each.value["alb"], null), "alb", null), "dns_name", null)
   listener_arn = lookup(lookup(lookup(module.alb, each.value["alb"], null), "listener", null), "arn", null)
 
 }
