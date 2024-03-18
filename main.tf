@@ -75,6 +75,11 @@ module "rabbitmq" {
   for_each = var.rabbitmq
   instance_type = each.value["instance_type"]
   subnet_ids = local.db_subnet_ids
+  vpc_id = module.vpc["main"].vpc_id
+  bastion_cidr = var.bastion_cidr
+  dns_domain = var.dns_domain
+  allow_subnets = lookup(local.subnet_cidr, each.value["allow_subnets"], null)
+
 }
 
 

@@ -94,6 +94,7 @@ elasticache = {
 rabbitmq = {
   main = {
     instance_type = "t3.medium"
+    allow_subnets = "app"
 
   }
 }
