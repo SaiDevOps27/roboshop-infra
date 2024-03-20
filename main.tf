@@ -137,7 +137,6 @@ data "aws_ami" "ami" {
   owners      = ["self"]
 }
 
-
 resource "aws_spot_instance_request" "load-runner" {
   ami = data.aws_ami.ami.id
   instance_type = "t3.medium"
@@ -146,7 +145,7 @@ resource "aws_spot_instance_request" "load-runner" {
 
   tags       = merge(
     var.tags,
-    { Name = "load-runner"}
+    { Name = "load-runner" }
   )
 }
 
@@ -156,4 +155,8 @@ resource "aws_ec2_tag" "name-tag" {
   resource_id = aws_spot_instance_request.load-runner.spot_instance_id
   value       = "load-runner"
 }
+
+
+
+
 
