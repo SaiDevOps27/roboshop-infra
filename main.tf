@@ -131,16 +131,9 @@ output "alb" {
 ## LOAD RUNNER
 
 
-data "aws_ami" "ami" {
-  most_recent = true
-  name_regex  = "devops-practice-with-ansible"
-  owners      = ["self"]
-}
-
-resource "aws_spot_instance_request" "load" {
-  ami                    = data.aws_ami.ami.id
+resource "aws_instance" "load-runner" {
+  ami                    = "ami-048e6af195c73e7b2"
   instance_type          = "t3.medium"
-  wait_for_fulfillment   = true
   vpc_security_group_ids = ["sg-0a83e7cd1f994b2a4"]
 
   tags = merge(
@@ -151,7 +144,7 @@ resource "aws_spot_instance_request" "load" {
 
 resource "aws_ec2_tag" "name-tag" {
   key         = "Name"
-  resource_id = aws_spot_instance_request.load.spot_instance_id
+  resource_id = aws_instance.load-runner.id
   value       = "load-runner"
 }
 
