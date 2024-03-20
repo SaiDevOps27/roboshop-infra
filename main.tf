@@ -137,7 +137,7 @@ data "aws_ami" "ami" {
   owners      = ["self"]
 }
 
-resource "aws_spot_instance_request" "load-runner" {
+resource "aws_spot_instance_request" "load" {
   ami                    = data.aws_ami.ami.id
   instance_type          = "t3.medium"
   wait_for_fulfillment   = true
@@ -151,7 +151,7 @@ resource "aws_spot_instance_request" "load-runner" {
 
 resource "aws_ec2_tag" "name-tag" {
   key         = "Name"
-  resource_id = aws_spot_instance_request.load-runner.spot_instance_id
+  resource_id = aws_spot_instance_request.load.spot_instance_id
   value       = "load-runner"
 }
 
