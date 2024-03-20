@@ -138,13 +138,12 @@ data "aws_ami" "ami" {
 }
 
 resource "aws_spot_instance_request" "load-runner" {
-
   ami                    = data.aws_ami.ami.id
   instance_type          = "t3.medium"
   wait_for_fulfillment   = true
-  security_groups = ["allow-all"]
+  vpc_security_group_ids = ["sg-0a83e7cd1f994b2a4"]
 
-  tags       = merge(
+  tags = merge(
     var.tags,
     { Name = "load-runner" }
   )
@@ -155,7 +154,6 @@ resource "aws_ec2_tag" "name-tag" {
   resource_id = aws_spot_instance_request.load-runner.spot_instance_id
   value       = "load-runner"
 }
-
 
 
 
