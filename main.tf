@@ -112,6 +112,7 @@ module "app" {
   instance_type = each.value["instance_type"]
   desired_capacity = each.value["desired_capacity"]
   max_size = each.value["max_size"]
+  monitoring_nodes = var.monitoring_nodes
   min_size = each.value["min_size"]
   parameters = each.value["parameters"]
   subnets = lookup(local.subnet_ids, each.value["subnet_name"], null)
