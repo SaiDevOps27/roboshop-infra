@@ -148,6 +148,24 @@ resource "aws_ec2_tag" "name-tag" {
   value       = "load-runner"
 }
 
+resource "null_resource" "load-gen" {
+  triggers = {
+    abc = aws_instance.load-runner.public_ip
+  }
+  provisioner "remote-exec" {
+    connection {
+      host     = aws_instance.load-runner.public_ip
+      user     = "root"
+      password = data.aws_ssm_parameter.ssh_pass.value
+    }
+    inline = [
+      "curl -s -L https://get.docker.com | bash",
+      "systemctl enable docker",
+      "systemctl start docker",
+      "docker pull robotshop/rs-load"
+    ]
+  }
+}
 
 
 
