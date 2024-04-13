@@ -37,3 +37,4 @@ secrets = [
   { name = "prod.nexus.pass",  value = "admin123", type = "SecureString" }
 ]
 
+
