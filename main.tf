@@ -104,7 +104,7 @@ module "app" {
   tags = var.tags
   vpc_id = module.vpc["main"].vpc_id
   bastion_cidr = var.bastion_cidr
-  depends_on = [module.docdb, module.rds, module.elasticache, module.rabbitmq, module.alb]
+  depends_on = [module.vpc, module.docdb, module.rds, module.elasticache, module.rabbitmq, module.alb]
   dns_domain = var.dns_domain
 
   for_each = var.apps
