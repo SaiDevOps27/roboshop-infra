@@ -13,6 +13,7 @@ module "vpc" {
 }
 
 
+/*
 module "docdb" {
   source = "git::https://github.com/SaiDevOps27/tf-module-docdb.git"
   env = var.env
@@ -168,5 +169,5 @@ resource "null_resource" "load-gen" {
   }
 }
 
-
+*/
 
