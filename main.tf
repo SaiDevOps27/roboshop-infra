@@ -214,3 +214,4 @@ module "eks" {
   MAX_SIZE           = 1
   MIN_SIZE           = 1
 }
+
