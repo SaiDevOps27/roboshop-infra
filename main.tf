@@ -210,7 +210,7 @@ module "eks" {
   ENV                = var.env
   PRIVATE_SUBNET_IDS = lookup(local.subnet_ids, "app", null)
   PUBLIC_SUBNET_IDS  = lookup(local.subnet_ids, "public", null)
-  DESIRED_SIZE       = 2
-  MAX_SIZE           = 2
-  MIN_SIZE           = 2
+  DESIRED_SIZE       = 1
+  MAX_SIZE           = 1
+  MIN_SIZE           = 1
 }
